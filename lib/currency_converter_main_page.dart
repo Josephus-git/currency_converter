@@ -7,10 +7,18 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
       borderSide: BorderSide(width: 2.0, style: BorderStyle.solid),
-      borderRadius: BorderRadius.all(Radius.circular(60)),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
     );
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.blueGrey,
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        elevation: 0,
+        title: const Text(
+          'Currency Converter',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,6 +47,24 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
                   enabledBorder: border,
                 ),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  debugPrint('button clicked');
+                },
+                style: TextButton.styleFrom(
+                  elevation: (15),
+                  backgroundColor: (Colors.black),
+                  foregroundColor: (Colors.white),
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text('Convert'),
               ),
             ),
           ],
