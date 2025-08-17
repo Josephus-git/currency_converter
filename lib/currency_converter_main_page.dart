@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
 
-class CurrencyConverterMaterialPage extends StatelessWidget {
+class CurrencyConverterMaterialPage extends StatefulWidget {
   const CurrencyConverterMaterialPage({super.key});
+
+  @override
+  State<CurrencyConverterMaterialPage> createState() {
+    return _CurrencyConverterMaterialPageState();
+  }
+}
+
+class _CurrencyConverterMaterialPageState
+    extends State<CurrencyConverterMaterialPage> {
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
+
+  void _convert() {
+    setState(() {
+      result = (double.tryParse(textEditingController.text) ?? 0) * 1500;
+    });
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
-      borderSide: BorderSide(width: 2.0, style: BorderStyle.solid),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
+      borderSide: const BorderSide(width: 2.0, style: BorderStyle.solid),
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
     );
     return Scaffold(
       backgroundColor: Colors.blueGrey,
@@ -18,6 +41,7 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
           'Currency Converter',
           style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
@@ -25,46 +49,47 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              '0',
-              style: TextStyle(
+              '₦ ${result.toStringAsFixed(2)}',
+              style: const TextStyle(
                 fontSize: 35,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: Colors.white,
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextField(
-                style: TextStyle(color: Colors.black),
+                controller: textEditingController,
+                style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   hintText: 'Please enter the amount in USD',
-                  hintStyle: TextStyle(color: Colors.black),
-                  prefixIcon: Icon(Icons.monetization_on),
+                  hintStyle: const TextStyle(color: Colors.black),
+                  prefixIcon: const Icon(Icons.monetization_on),
                   prefixIconColor: Colors.black,
                   filled: true,
                   fillColor: Colors.white,
                   focusedBorder: border,
                   enabledBorder: border,
                 ),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: ElevatedButton(
-                onPressed: () {
-                  debugPrint('button clicked');
-                },
-                style: TextButton.styleFrom(
-                  elevation: (15),
-                  backgroundColor: (Colors.black),
-                  foregroundColor: (Colors.white),
+                onPressed: _convert,
+                style: ElevatedButton.styleFrom(
+                  elevation: 15,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text('Convert'),
+                child: const Text('Convert'),
               ),
             ),
           ],
