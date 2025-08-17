@@ -44,21 +44,21 @@ class _CurrencyConverterMaterialPageState
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              '₦ ${result.toStringAsFixed(2)}',
-              style: const TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '₦ ${result.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
+              TextField(
                 controller: textEditingController,
                 style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -75,10 +75,8 @@ class _CurrencyConverterMaterialPageState
                   decimal: true,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: ElevatedButton(
+              const SizedBox(height: 10),
+              ElevatedButton(
                 onPressed: _convert,
                 style: ElevatedButton.styleFrom(
                   elevation: 15,
@@ -91,8 +89,8 @@ class _CurrencyConverterMaterialPageState
                 ),
                 child: const Text('Convert'),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
